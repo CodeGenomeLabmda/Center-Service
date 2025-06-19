@@ -12,3 +12,24 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Center {
+  id            String   @id @default(uuid())
+  name          String   @unique
+  location      String
+  contactNumber String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("centers")
+}
+
+model Holiday {
+  id        String   @id @default(uuid())
+  name      String
+  date      DateTime @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("holidays")
+}
