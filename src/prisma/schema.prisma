@@ -28,11 +28,12 @@ model Center {
 model Holiday {
   id        String   @id @default(uuid())
   name      String
-  date      DateTime @unique
+  date      DateTime 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   center    Center   @relation(fields: [centerId], references: [id])
   centerId  String
 
+  @@unique([centerId,date])
   @@map("holidays")
 }
