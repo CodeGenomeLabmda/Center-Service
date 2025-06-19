@@ -26,3 +26,7 @@ export const updateCenterHandler = async (req: Request, res: Response, next: Nex
     });
     res.status(StatusCodes.NOT_IMPLEMENTED).send("Not yet implemented!");
 }
+
+export const getAllCenterHandler = async (req: Request, res: Response, next: NextFunction) => {
+    res.status(StatusCodes.NOT_IMPLEMENTED).send("Not yet implemented!");
+}
