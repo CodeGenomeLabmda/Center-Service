@@ -45,3 +45,15 @@ export const updateCenter = async (id: string, paylod: Prisma.CenterCreateInput)
         }
     }
 }
+
+export const getAllCenters = async () => {
+    const centers = await prismaClient.center.findMany({
+        select: {
+            id: true,
+            name: true,
+            location: true,
+            contactNumber: true
+        }
+    });
+    return centers;
+}
