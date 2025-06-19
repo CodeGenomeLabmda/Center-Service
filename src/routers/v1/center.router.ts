@@ -6,7 +6,7 @@ import { createCenterSchema, updateCenterSchema } from '../../validators/center.
 const centerRouter = express.Router();
 
 centerRouter.post('/', validateRequetBody(createCenterSchema), createCenterHandler);
-centerRouter.patch('/', validateRequetBody(updateCenterSchema), updateCenterHandler);
+centerRouter.patch('/:id', validateRequetBody(updateCenterSchema), updateCenterHandler);
 
 
 export default centerRouter;
