@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { prismaClient } from "../prisma/client";
-import { InternalServerError } from "../utils/errors/app.error";
+import { ConflictError } from "../utils/errors/app.error";
 
 export const createCenter = async (paylod: Prisma.CenterCreateInput) => {
     try {
@@ -18,7 +18,7 @@ export const createCenter = async (paylod: Prisma.CenterCreateInput) => {
     } catch (error) {
         if (error instanceof PrismaClientKnownRequestError) {
             if (error.code === 'P2002') {
-                throw new InternalServerError("A center with this name already exists. Please choose a different name")
+                throw new ConflictError("A center with this name already exists. Please choose a different name")
             }
         }
     }
