@@ -14,12 +14,13 @@ datasource db {
 }
 
 model Center {
-  id            String   @id @default(uuid())
-  name          String   @unique
+  id            String    @id @default(uuid())
+  name          String    @unique
   location      String
   contactNumber String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  holidays      Holiday[]
 
   @@map("centers")
 }
@@ -30,6 +31,8 @@ model Holiday {
   date      DateTime @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  center    Center   @relation(fields: [centerId], references: [id])
+  centerId  String
 
   @@map("holidays")
 }
