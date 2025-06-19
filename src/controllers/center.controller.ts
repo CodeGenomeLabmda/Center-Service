@@ -10,3 +10,7 @@ export const createCenterHandler = async (req: Request, res: Response, next: Nex
         data: center
     })
 }
+
+export const updateCenterHandler = async(req: Request, res: Response, next: NextFunction) => {
+    res.status(StatusCodes.NOT_IMPLEMENTED).send("Not yet implemented!");
+}
