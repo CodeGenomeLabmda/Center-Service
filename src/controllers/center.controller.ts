@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { createCenterService, getAllCentersService, updateCenterService } from "../services/center.service";
+import { createCenterService, getAllCentersService, getCenterByIdService, updateCenterService } from "../services/center.service";
 import { validate as isValidUUID } from "uuid";
 import { BadRequestError } from "../utils/errors/app.error";
 
@@ -14,7 +14,6 @@ export const createCenterHandler = async (req: Request, res: Response, next: Nex
 }
 
 export const updateCenterHandler = async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.params.id)
     if (!isValidUUID(req.params.id)) {
         throw new BadRequestError("Id is not a valid uuid!");
     }
@@ -33,5 +32,17 @@ export const getAllCenterHandler = async (req: Request, res: Response, next: Nex
         success: true,
         message: "Got all centers successfully!",
         data: centers
+    });
+}
+
+export const getCenterHandler = async (req: Request, res: Response, next: NextFunction) => {
+    if (!isValidUUID(req.params.id)) {
+        throw new BadRequestError("Id is not a valid uuid!");
+    }
+    const center = await getCenterByIdService(req.params.id);
+    res.status(StatusCodes.CREATED).json({
+        success: true,
+        message: `Successfully got center with id: ${req.params.id}!`,
+        data: center
     });
 }

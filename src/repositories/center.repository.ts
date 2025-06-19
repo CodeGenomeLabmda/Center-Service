@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { prismaClient } from "../prisma/client";
-import { ConflictError } from "../utils/errors/app.error";
+import { ConflictError, NotFoundError } from "../utils/errors/app.error";
 
 export const createCenter = async (paylod: Prisma.CenterCreateInput) => {
     try {
@@ -56,4 +56,21 @@ export const getAllCenters = async () => {
         }
     });
     return centers;
+}
+
+
+export const getCenterById = async (id: string) => {
+    const center = await prismaClient.center.findUnique({
+        where: { id: id },
+        select: {
+            id: true,
+            name: true,
+            location: true,
+            contactNumber: true
+        }
+    });
+    if (!center) {
+        throw new NotFoundError(`No center found with id: ${id}`);
+    }
+    return center;
 }
