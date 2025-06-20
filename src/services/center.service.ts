@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-import { createCenter, deleteCenterById, getAllCenters, getCenterById, updateCenter } from "../repositories/center.repository";
+import { createCenter, deleteCenterById, getAllCenterHolidays, getAllCenters, getCenterById, updateCenter } from "../repositories/center.repository";
 
 export const createCenterService = async (paylod: Prisma.CenterCreateInput) => {
     const center = await createCenter(paylod);
@@ -24,4 +24,9 @@ export const getCenterByIdService = async (id: string) => {
 export const deleteCenterByIdService = async (id: string) => {
     const center = await deleteCenterById(id);
     return center;
+}
+
+export const getAllCenterHolidaysService = async (id: string) => {
+    const holidays = await getAllCenterHolidays(id);
+    return holidays;
 }
