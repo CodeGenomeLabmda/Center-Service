@@ -90,3 +90,23 @@ export const deleteCenterById = async (id: string) => {
         }
     }
 };
+
+export const getAllCenterHolidays = async (id: string) => {
+
+    const center = await prismaClient.center.findUnique({
+        where: { id: id },
+        select: {
+            holidays: {
+                select: {
+                    id: true,
+                    name: true,
+                    date: true
+                }
+            }
+        }
+    });
+    if (!center) {
+        throw new NotFoundError(`No center found with id: ${id}`);
+    }
+    return center.holidays;
+}
