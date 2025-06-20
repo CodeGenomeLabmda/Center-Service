@@ -58,7 +58,6 @@ export const getAllCenters = async () => {
     return centers;
 }
 
-
 export const getCenterById = async (id: string) => {
     const center = await prismaClient.center.findUnique({
         where: { id: id },
@@ -74,3 +73,20 @@ export const getCenterById = async (id: string) => {
     }
     return center;
 }
+
+export const deleteCenterById = async (id: string) => {
+    try {
+        await prismaClient.center.delete({
+            where: {
+                id: id
+            }
+        });
+        return true;
+    } catch (error) {
+        if (error instanceof PrismaClientKnownRequestError) {
+            if (error.code === 'P2025') {
+                throw new ConflictError(`No center found with id: ${id}`);
+            }
+        }
+    }
+};
