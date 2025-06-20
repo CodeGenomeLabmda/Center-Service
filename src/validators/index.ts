@@ -11,7 +11,6 @@ export const validateRequetBody = (schema: AnyZodObject) => {
             if (err instanceof ZodError) {
                 res.status(StatusCodes.BAD_REQUEST).json({
                     message: "Invalid request body",
-                    success: false,
                     error: err.issues.map((issue: any) => {
                         return `${issue.message}, field: ${issue.path.join("")}`
                     })
