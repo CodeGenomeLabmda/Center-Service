@@ -1,5 +1,5 @@
 import express from 'express';
-import { createCenterHandler, getAllCenterHandler, getCenterHandler, updateCenterHandler } from '../../controllers/center.controller';
+import { createCenterHandler, deleteCenterHandler, getAllCenterHandler, getCenterHandler, updateCenterHandler } from '../../controllers/center.controller';
 import { validateRequetBody } from '../../validators';
 import { createCenterSchema, updateCenterSchema } from '../../validators/center.validator';
 
@@ -9,6 +9,7 @@ centerRouter.post('/', validateRequetBody(createCenterSchema), createCenterHandl
 centerRouter.patch('/:id', validateRequetBody(updateCenterSchema), updateCenterHandler);
 centerRouter.get('/', getAllCenterHandler);
 centerRouter.get('/:id', getCenterHandler);
+centerRouter.delete('/:id', deleteCenterHandler);
 
 
 export default centerRouter;
